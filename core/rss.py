@@ -17,13 +17,13 @@ def get_custom_rss(title, link, description):
         link,
         description,
         [CustomRssItem(
-            item['title'],
-            item['summary'],
-            item['summary'],
-            time.strftime("%Y-%m-%d %H:%M:%S", item['published_parsed']),
+            item.get('title'),
+            item.get('summary'),
+            item.get('summary'),
+            time.strftime("%Y-%m-%d %H:%M:%S", item.get('published_parsed')),
             0,
-            item['link'],
-            item['author']
+            item.get('link'),
+            item.get('author')
         ) for item in rss.entries]
     )
 
@@ -110,10 +110,11 @@ def get_site_rss_channel_title_link_dict():
 
 def load_site_rss_all():
     """加载所有site 包下的py文件"""
+
     result: Dict[str, Dict[str, Any]] = {}
 
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    db_path = os.path.join(BASE_DIR, "../site")
+    db_path = os.path.join(BASE_DIR, "../website")
 
     for root, dirs, files in os.walk(db_path):
         for site_item in files:
@@ -122,7 +123,7 @@ def load_site_rss_all():
 
             if not fnmatch.fnmatch(site_item, '*.py'):
                 continue
-            py_name = 'site.' + site_item.replace('.py', '')
+            py_name = 'website.' + site_item.replace('.py', '')
 
             __import__(py_name)
 

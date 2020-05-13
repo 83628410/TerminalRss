@@ -3,9 +3,8 @@ import terminal
 from prompt_toolkit import PromptSession
 from terminal import terminal_config
 
-
 def bottom_toolbar():
-    return [('class:bottom-toolbar', ' [ l ]rss 频道列表  [ exit ]退出  [ u ]更新数据库 [ r ]设为全部已读 [ s ]发送邮件')]
+    return [('class:bottom-toolbar', ' [ l ]rss 频道列表  [ e ]退出  [ u ]更新数据库 [ r ]设为全部已读 [ s ]发送邮件')]
 
 
 if __name__ == '__main__':
@@ -32,5 +31,7 @@ if __name__ == '__main__':
         if answer == 's':
             terminal.exec_send_mail()
             continue
+        if answer == 'e':
+            break
 
     print("bye bye !!")
